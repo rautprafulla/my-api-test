@@ -11,12 +11,14 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<flow name="my-api-testFlow" doc:id="b14197c4-fe99-449b-b5bf-2f780644a790" >
 		<http:listener doc:name="Listener" doc:id="5cb2c677-1524-4de9-a17c-924745709c7f" config-ref="HTTP_Listener_config" path="/test1"/>
 		<logger level="INFO" doc:name="Logger" doc:id="dcafcb96-7388-4eed-9be6-a7b858d3d620" message="#[payload]"/>
-		<ee:transform doc:name="Transform Message" doc:id="d37a933a-cbe7-4914-8179-ef7b7557f873" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
+		<set-variable value="10" doc:name="Set Variable" doc:id="0cbc03b9-3c73-4779-ad3a-f5b3fb344ae0" variableName="v1"/>
+		<set-variable value="22" doc:name="Set Variable" doc:id="711d06ba-d299-4079-b367-4e62a4b772e8" variableName="v2"/>
+		<ee:transform doc:name="Transform Message" doc:id="d37a933a-cbe7-4914-8179-ef7b7557f873">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-payload]]></ee:set-payload>
+vars.v1 as Number + vars.v2 as Number]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="e5bb213f-1a54-4da1-91f2-d42f8bef3cf0" message="#[payload]"/>
