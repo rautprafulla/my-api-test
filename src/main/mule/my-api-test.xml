@@ -11,15 +11,16 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<flow name="my-api-testFlow" doc:id="b14197c4-fe99-449b-b5bf-2f780644a790" >
 		<http:listener doc:name="Listener" doc:id="5cb2c677-1524-4de9-a17c-924745709c7f" config-ref="HTTP_Listener_config" path="/test1"/>
 		<logger level="INFO" doc:name="Logger" doc:id="dcafcb96-7388-4eed-9be6-a7b858d3d620" message="#[payload]"/>
-		<set-variable value="10" doc:name="Set Variable" doc:id="0cbc03b9-3c73-4779-ad3a-f5b3fb344ae0" variableName="v1"/>
+		<set-variable value="10" doc:name="v1" doc:id="0cbc03b9-3c73-4779-ad3a-f5b3fb344ae0" variableName="v1"/>
 		<logger level="INFO" doc:name="v1" doc:id="ad4e3b3a-53b9-43dd-9bc9-a8fc5fdf791c" message="#[vars.v1]"/>
-		<set-variable value="22" doc:name="Set Variable" doc:id="711d06ba-d299-4079-b367-4e62a4b772e8" variableName="v2"/>
+		<set-variable value="22" doc:name="v2" doc:id="711d06ba-d299-4079-b367-4e62a4b772e8" variableName="v2"/>
+		<set-variable value="22" doc:name="v3" doc:id="896befb1-2c98-4ebc-b578-3dcf0884a087" variableName="v3"/>
 		<ee:transform doc:name="Transform Message" doc:id="d37a933a-cbe7-4914-8179-ef7b7557f873">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-vars.v1 as Number + vars.v2 as Number]]></ee:set-payload>
+vars.v1 as Number + vars.v2 as Number + vars.v3 as Number]]></ee:set-payload>
 			</ee:message>
 			<ee:variables >
 				<ee:set-variable variableName="aaa" ><![CDATA[%dw 2.0
@@ -28,7 +29,7 @@ output application/json
 vars.v1 as Number + vars.v2 as Number]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="e5bb213f-1a54-4da1-91f2-d42f8bef3cf0" message="#[payload]"/>
+		<logger level="INFO" doc:name="UpdateLogger" doc:id="e5bb213f-1a54-4da1-91f2-d42f8bef3cf0" message="#[payload]"/>
 		<logger level="INFO" doc:name="MunitLogger" doc:id="065eff80-b6d7-48f2-a99f-0cd6a2ff714d" message="#[payload]"/>
 		<logger level="INFO" doc:name="munitlogger2" doc:id="62d8beb6-2415-4e9f-b165-f6e397b353af" message="#[payload]"/>
 		<logger level="INFO" doc:name="LoggerInDevelopment" doc:id="cf8febd1-69b4-4d3d-9c4c-c466ee6c694b" message="#[payload]"/>
