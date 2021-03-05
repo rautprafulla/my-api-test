@@ -21,6 +21,12 @@ output application/json
 ---
 vars.v1 as Number + vars.v2 as Number]]></ee:set-payload>
 			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="aaa" ><![CDATA[%dw 2.0
+output application/json
+---
+vars.v1 as Number + vars.v2 as Number]]></ee:set-variable>
+			</ee:variables>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="e5bb213f-1a54-4da1-91f2-d42f8bef3cf0" message="#[payload]"/>
 		<logger level="INFO" doc:name="MunitLogger" doc:id="065eff80-b6d7-48f2-a99f-0cd6a2ff714d" message="#[payload]"/>
